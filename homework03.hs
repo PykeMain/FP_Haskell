@@ -3,14 +3,13 @@ import Data.Char
 
 main :: IO()
 main = do
-    {--
-    print $ findMaxPalindrome 1112332 -- == 3211123
-    print $ findMaxPalindrome 22220 -- == 22022
-    print $ findMaxPalindrome 2205 -- == 252
-    print $ findMaxPalindrome 120021 -- == 210012
-    print $ findMaxPalindrome 12320 -- == 232
-    print $ findMaxPalindrome 123 -- == 3
-    --}
+    print $ findMaxPalindrome 1112332 == 3211123
+    print $ findMaxPalindrome 22220 == 22022
+    print $ findMaxPalindrome 2205 == 252
+    print $ findMaxPalindrome 120021 == 210012
+    print $ findMaxPalindrome 12320 == 232
+    print $ findMaxPalindrome 123 == 3
+    
     print $ calculate "1+2+x" [('x', 5)] == 8
     print $ calculate "x+2+x-2+y+z" [('x', 1), ('y', 2), ('z', 3)] == 7
     print $ calculate "x+2-x-2+y+x" [('x', 1), ('y', -15)] == (-14)
@@ -18,11 +17,11 @@ main = do
     print $ calculate "8-2" [] == 6
     print $ calculate "5" [] == 5
 
-{--
-createPalindrome xs = (map (take 1) (filter (odd . length) xs)) ++ (filter (even . length) xs)
+isPalindrome :: String -> Bool
+isPalindrome x = reverse x == x  && x /= ""
 
-findMaxPalindrome  =  group . sort . show
---}
+findMaxPalindrome :: Int -> Int
+findMaxPalindrome  = maximum . map (read) . filter (isPalindrome) . concat . map (permutations) . subsequences . show
 
 type Pairing = (Char, Int)
 
